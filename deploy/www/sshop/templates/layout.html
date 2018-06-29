@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>地狗商城 - 理想生活上地狗</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/jumbotron-narrow.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation"><a href="{% url 'shop' %}">商品列表</a></li>
+                {% if not raw_user %}
+                <li role="presentation"><a href="{% url 'user' %}">个人中心</a></li>
+                <li role="presentation"><a href="{% url 'seckill' %}">秒杀活动</a></li>
+                <li role="presentation"><a href="{% url 'shopcar' %}">购物车</a></li>
+                <li role="presentation"><a href="{% url 'user_change' %}">修改密码</a></li>
+                <li role="presentation"><a href="{% url 'logout' %}">注销</a></li>
+                {% else %}
+                <li role="presentation"><a href="{% url 'login' %}">登录</a></li>
+                <li role="presentation"><a href="{% url 'register' %}">注册</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <h3 class="text-muted">地狗商城 ᶘ ᵒᴥᵒᶅ</h3>
+    </div>
+        {% if success %}
+        <div class="alert alert-success alert-dismissable">
+            操作成功。
+        </div>
+        {% endif %}
+        {% if danger %}
+        <div class="alert alert-danger alert-dismissable">
+            操作失败。
+        </div>
+        {% endif %}
+    {% block body %}
+    {% endblock %}
+    <footer class="footer">
+        <p>&copy; 2018 gsfish.</p>
+    </footer>
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="jumbotron user-info">
+    <h1 class="user-username">{{ user.username }}</h1>
+    <h3 class="user-email">邮箱地址：{{ user.mail }}</h3>
+    <h3 class="user-integral">剩余积分：{{ user.integral }}</h3>
+
+{% if owns %}
+    {% if is_admin %}
+    <p>if you you own one thing more than the shop has, we will send you a gift (=￣ω￣=)</p>
+    <a href="{% url 'user_reset' %}" class="btn btn-info">Blue pill</a>
+    {% endif %}
+</div>
+<div class="commodity-list">
+    <table class="table">
+        <tr>
+            <th>商品名称</th>
+            <th>持有数量</th>
+        </tr>
+        {% for own in owns %}
+        <tr>
+            <td class="commodity-name"><a href="{% url 'info_cid' own.commodity.id %}">{{ own.commodity.name }}</a></td>
+            <td>
+                {% if own.amount > 1000 %}
+                /static/{0h_y0u_f1n411y_g0t_m3,backup.sql}
+                {% else %}
+                {{ own.amount }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+        <div class="row">
+            <form action="{% url 'register' %}" method="post" class="col-lg-6 col-lg-offset-3">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.username.errors }}
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    {{ form.mail.errors }}
+                    {{ form.mail.label_tag }}
+                    {{ form.mail }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.errors }}
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+                <div class="form-group">
+                    {{ form.password_confirm.errors }}
+                    {{ form.password_confirm.label_tag }}
+                    {{ form.password_confirm }}
+                </div>
+                <div class="form-group">
+                    {{ form.invite_user.errors }}
+                    {{ form.invite_user.label_tag }}
+                    {{ form.invite_user }}
+                </div>
+                 <div>
+                    <label>验证码 ( {{ ques }} )：</label><br/>
+                    <canvas id="vtt_captcha" width="680" height="460" rel="{{ uuid }}"></canvas>
+                    <input type="hidden" id="captcha_x" name="captcha_x" value="">
+                    <input type="hidden" id="captcha_y" name="captcha_y" value="">
+                </div>
+                <button class="btn btn-primary pull-right" type="submit">注册</button>
+            </form>
+            </div>
+        <br/>
+{% include "captcha.html" %}
+{% endblock %}
