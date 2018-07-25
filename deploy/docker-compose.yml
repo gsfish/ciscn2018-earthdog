@@ -1,0 +1,12 @@
+version: '2'
+services:
+  sshop:
+    build: .
+    environment:
+      MYSQL_DATABASE: sshop
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: ODY5ZDM1ZmI5OTg5
+      INIT_FLAG: CISCN{this_is_a_sample_flag}
+    ports:
+      - "80:8233"
+      - "22:22"

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="jumbotron">
+      <h1>秒杀活动</h1>
+      {% if alert %}
+      <p>please feel free to <a href="mailto:{{ admin_mail }}">contact</a> me if you have any suggestions :)</p>
+      {% endif %}
+      <form action="{% url 'seckill' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="ID" name="id">
+        </div>
+        <button class="btn btn-danger" type="submit">秒杀</button>
+      </form>
+    </div>
+{% endblock %}

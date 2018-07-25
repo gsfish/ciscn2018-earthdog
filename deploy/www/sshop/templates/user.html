@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="jumbotron user-info">
+    <h1 class="user-username">{{ user.username }}</h1>
+    <h3 class="user-email">邮箱地址：{{ user.mail }}</h3>
+    <h3 class="user-integral">剩余积分：{{ user.integral }}</h3>
+
+{% if owns %}
+    {% if is_super %}
+        <form action="{% url 'user_debug' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+        <input type="text" class="form-control" name="cmd">
+        </div>
+        {% if debug %}
+            <pre>{{ debug }}</pre>
+        {% endif %}
+        <button class="btn btn-danger" type="submit">DEBUG</button>
+        </form>
+    {% elif is_admin %}
+        <p>if you own one thing more than the shop has</p>
+        <p>we will give you power (=￣ω￣=)</p>
+        <a href="{% url 'user_reset' %}" class="btn btn-info">Blue pill</a>
+    {% endif %}
+</div>
+<div class="commodity-list">
+    <table class="table">
+        <tr>
+            <th>商品名称</th>
+            <th>持有数量</th>
+        </tr>
+        {% for own in owns %}
+        <tr>
+            <td class="commodity-name"><a href="{% url 'info' %}?id={{ own.commodity.id }}">{{ own.commodity.name }}</a></td>
+            <td>
+                {{ own.amount }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+</div>
+{% endif %}
+{% endblock %}

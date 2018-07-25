@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="row marketing">
+
+    <div class="commodity-list">
+        <table class="table">
+            <tr>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>剩余数量</th>
+                <th>操作</th>
+            </tr>
+            {% for data in commoditys %}
+            <tr>
+                <td class="commodity-name"><a href="{% url 'info' %}?id={{ data.id }}">{{ data.name }}</a></td>
+                <td>{{ data.price }}</td>
+                <td>{{ data.amount }}</td>
+                <td>
+                    <form action="{% url 'shopcar_add' %}" method="post" id="{{ data.name }}-{{ data.id }}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ data.id }}">
+                        <input type="submit" value="加入购物车">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+    <div class="pagination col-lg-12">
+        {% if commoditys.has_previous %}
+        <a href="?page={{ commoditys.previous_page_number }}">上一页</a>
+        {% endif %}
+        {% if commoditys.has_next %}
+        <a href="?page={{ commoditys.next_page_number }}" class="pull-right">下一页</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
