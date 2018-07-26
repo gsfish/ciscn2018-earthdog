@@ -134,7 +134,7 @@ BLACK_LIST = ['import', 'os', 'commands', 'subprocess' ,'sys', 'shutdown', 'powe
 INIT_ADMIN_USER = 'admin'
 INIT_ADMIN_MAIL = 'root@grassfish.net'
 
-INIT_INTEGRAL = 9999
+INIT_INTEGRAL = 1000
 INIT_PRICE_MIN = 5
 INIT_PRICE_MAX = 20
 
